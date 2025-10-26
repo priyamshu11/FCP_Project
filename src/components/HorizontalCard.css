@@ -1,0 +1,171 @@
+.horizontal-card {
+  padding: 60px 0;
+  background-color: white;
+}
+
+.card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.card-text {
+  padding-right: 2rem;
+}
+
+.card-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.card-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.card-button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #0052a3;
+}
+
+.card-graphic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-interface {
+  background: rgba(102, 126, 234, 0.1);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+  transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.dashboard-header h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.dashboard-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-icons .icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.dashboard-card h4 {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.global .world-map {
+  font-size: 2rem;
+}
+
+.analytics .charts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.analytics .line-chart,
+.analytics .bar-chart {
+  font-size: 1.5rem;
+}
+
+.transactions .amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.transactions .change {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.transactions .change.positive {
+  color: #51cf66;
+}
+
+.security .lock-icon {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .card-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .card-text {
+    padding-right: 0;
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 2rem;
+  }
+  
+  .dashboard-interface {
+    transform: none;
+    max-width: 100%;
+  }
+}
