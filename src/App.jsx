@@ -15,7 +15,6 @@ import Balances from './pages/Balances';
 import Transactions from './pages/Transactions';
 import Customers from './pages/Customers';
 import Catalogue from './pages/Catalogue';
-import Products from './pages/Products';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import Settings from './pages/Settings';
@@ -48,7 +47,6 @@ function AppContent() {
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/catalogue" element={<Catalogue />} />
-          <Route path="/products" element={<Products />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />

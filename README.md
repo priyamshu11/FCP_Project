@@ -19,7 +19,6 @@ A modern, responsive website built with React and Vite, featuring a clean design
 ### Pages
 - **Home/Hero**: Landing page with call-to-action sections
 - **Login**: User authentication page with form validation
-- **Products**: Product showcase with filtering capabilities
 - **Resources**: Support resources and documentation
 - **Contact**: Contact form and company information
 - **FAQ**: Frequently asked questions with expandable answers
@@ -38,8 +37,6 @@ src/
 ├── pages/
 │   ├── Login.jsx          # Login page
 │   ├── Login.css
-│   ├── Products.jsx       # Products page
-│   ├── Products.css
 │   ├── Resources.jsx      # Resources page
 │   ├── Resources.css
 │   ├── Contact.jsx        # Contact page

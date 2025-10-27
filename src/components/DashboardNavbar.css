@@ -1,14 +1,13 @@
 .dashboard-navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 280px;
-  right: 0;
+  width: 100%;
   height: 70px;
   background: white;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
-  z-index: 999;
+  z-index: 1100;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -337,10 +336,6 @@
 }
 
 @media (max-width: 768px) {
-  .dashboard-navbar {
-    left: 0;
-  }
-  
   .navbar-content {
     padding: 0 1rem;
   }
@@ -356,5 +351,9 @@
   .icon-btn {
     width: 35px;
     height: 35px;
+  }
+  
+  .search-container {
+    max-width: 200px;
   }
 }

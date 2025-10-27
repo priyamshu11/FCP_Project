@@ -1,0 +1,111 @@
+// src/data/transactions.js
+
+const transactions = [
+  {
+    id: "TXN10001",
+    amount: 1250.0,
+    status: "Success",
+    date: "2025-10-25T10:15:00Z",
+    paymentMethod: "Credit Card",
+  },
+  {
+    id: "TXN10002",
+    amount: 540.5,
+    status: "Failed",
+    date: "2025-10-24T14:30:00Z",
+    paymentMethod: "UPI",
+  },
+  {
+    id: "TXN10003",
+    amount: 320.0,
+    status: "Pending",
+    date: "2025-10-24T16:45:00Z",
+    paymentMethod: "Wallet",
+  },
+  {
+    id: "TXN10004",
+    amount: 980.75,
+    status: "Success",
+    date: "2025-10-23T09:20:00Z",
+    paymentMethod: "Net Banking",
+  },
+  {
+    id: "TXN10005",
+    amount: 2150.0,
+    status: "Success",
+    date: "2025-10-23T12:50:00Z",
+    paymentMethod: "Credit Card",
+  },
+  {
+    id: "TXN10006",
+    amount: 430.0,
+    status: "Failed",
+    date: "2025-10-22T11:10:00Z",
+    paymentMethod: "UPI",
+  },
+  {
+    id: "TXN10007",
+    amount: 780.25,
+    status: "Pending",
+    date: "2025-10-22T15:40:00Z",
+    paymentMethod: "Wallet",
+  },
+  {
+    id: "TXN10008",
+    amount: 1120.0,
+    status: "Success",
+    date: "2025-10-21T13:00:00Z",
+    paymentMethod: "Net Banking",
+  },
+  {
+    id: "TXN10009",
+    amount: 640.5,
+    status: "Success",
+    date: "2025-10-21T16:20:00Z",
+    paymentMethod: "Credit Card",
+  },
+  {
+    id: "TXN10010",
+    amount: 299.0,
+    status: "Failed",
+    date: "2025-10-20T10:45:00Z",
+    paymentMethod: "UPI",
+  },
+  {
+    id: "TXN10011",
+    amount: 1500.0,
+    status: "Success",
+    date: "2025-10-20T14:30:00Z",
+    paymentMethod: "Wallet",
+  },
+  {
+    id: "TXN10012",
+    amount: 875.75,
+    status: "Pending",
+    date: "2025-10-19T11:15:00Z",
+    paymentMethod: "Net Banking",
+  },
+  {
+    id: "TXN10013",
+    amount: 430.0,
+    status: "Success",
+    date: "2025-10-19T09:50:00Z",
+    paymentMethod: "Credit Card",
+  },
+  {
+    id: "TXN10014",
+    amount: 620.5,
+    status: "Failed",
+    date: "2025-10-18T12:40:00Z",
+    paymentMethod: "UPI",
+  },
+  {
+    id: "TXN10015",
+    amount: 1080.0,
+    status: "Success",
+    date: "2025-10-18T15:25:00Z",
+    paymentMethod: "Wallet",
+  },
+];
+
+export default transactions;

@@ -1,161 +1,252 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Sidebar.css';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Box,
+  Typography,
+  IconButton,
+  Divider,
+  Tooltip,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  Menu as MenuIcon
+} from '@mui/icons-material';
+
+const DRAWER_WIDTH = 240;
+const DRAWER_WIDTH_COLLAPSED = 60;
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const [expandedItems, setExpandedItems] = useState({});
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
 
-  const toggleExpanded = (item) => {
-    setExpandedItems(prev => ({
-      ...prev,
-      [item]: !prev[item]
-    }));
-  };
-
-  const toggleAccountDropdown = () => {
-    setIsAccountDropdownOpen(!isAccountDropdownOpen);
-  };
-
-  const mainNavItems = [
-    { name: 'Home', icon: '🏠', path: '/dashboard' },
-    { name: 'Balances', icon: '📊', path: '/balances' },
-    { name: 'Transactions', icon: '🔄', path: '/transactions' },
-    { name: 'Customers', icon: '👤', path: '/customers' },
-    { name: 'Product catalogue', icon: '📦', path: '/catalogue' }
+  const menuItems = [
+    { label: 'Dashboard', path: '/dashboard' },
+    { label: 'Transactions', path: '/transactions' },
+    { label: 'Configurations', path: '/configurations' },
+    { label: 'Reports & Analytics', path: '/reports' },
+    { label: 'Users & Roles', path: '/users' },
+    { label: 'Developer / API', path: '/developer' },
+    { label: 'Settings', path: '/settings' },
+    { label: 'Logs / Audit Trail', path: '/logs' },
+    { label: 'Support', path: '/support' },
   ];
 
-  const productItems = [
-    { name: 'Payments', icon: '💳', hasDropdown: true },
-    { name: 'Billing', icon: '🧾', hasDropdown: true },
-    { name: 'Reporting', icon: '📊', hasDropdown: true },
-    { name: 'More', icon: '⋯', hasDropdown: true }
-  ];
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const handleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    if (isMobile) {
+      setMobileOpen(false);
+    }
+  };
+
+  const isActiveRoute = (path) => {
+    return location.pathname === path;
+  };
+
+  const getInitials = (label) => {
+    return label
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  };
+
+  const drawer = (
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Header/Brand Area */}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: isCollapsed ? 'center' : 'space-between',
+          padding: '16px 12px',
+          minHeight: 64,
+        }}
+      >
+        {!isCollapsed ? (
+          <Typography variant="h6" noWrap sx={{ color: '#ffffff', fontWeight: 600 }}>
+            Acme Corp
+          </Typography>
+        ) : (
+          <Typography variant="h6" noWrap sx={{ color: '#ffffff', fontWeight: 700 }}>
+            AC
+          </Typography>
+        )}
+      </Box>
+
+      <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.12)' }} />
+
+      {/* Menu Items */}
+      <List
+        sx={{
+          flex: 1,
+          px: 1,
+          py: 2,
+        }}
+      >
+        {menuItems.map((item) => {
+          const isActive = isActiveRoute(item.path);
+          return (
+            <Tooltip
+              key={item.label}
+              title={isCollapsed ? item.label : ''}
+              placement="right"
+              arrow
+            >
+              <ListItemButton
+                onClick={() => handleNavigation(item.path)}
+                sx={{
+                  minHeight: 48,
+                  borderRadius: 2,
+                  mb: 0.5,
+                  bgcolor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                  borderLeft: isActive ? '3px solid #2196f3' : '3px solid transparent',
+                  color: '#ffffff',
+                  '&:hover': {
+                    bgcolor: 'rgba(255, 255, 255, 0.05)',
+                  },
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {isCollapsed ? (
+                  <Box
+                    sx={{
+                      minWidth: 0,
+                      justifyContent: 'center',
+                      display: 'flex',
+                      alignItems: 'center',
+                      color: isActive ? '#2196f3' : 'rgba(255, 255, 255, 0.7)',
+                      fontWeight: isActive ? 600 : 400,
+                    }}
+                  >
+                    {getInitials(item.label)}
+                  </Box>
+                ) : (
+                  <ListItemText
+                    primary={item.label}
+                    sx={{
+                      '& .MuiListItemText-primary': {
+                        fontSize: '0.95rem',
+                        fontWeight: isActive ? 600 : 400,
+                        color: isActive ? '#2196f3' : 'rgba(255, 255, 255, 0.87)',
+                      },
+                    }}
+                  />
+                )}
+              </ListItemButton>
+            </Tooltip>
+          );
+        })}
+      </List>
+
+      {/* Footer with Toggle Button */}
+      <Box sx={{ mt: 'auto', px: 1, py: 2 }}>
+        <Divider sx={{ mb: 2, borderColor: 'rgba(255, 255, 255, 0.12)' }} />
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <IconButton
+            onClick={handleCollapse}
+            sx={{
+              color: 'rgba(255, 255, 255, 0.7)',
+              '&:hover': {
+                bgcolor: 'rgba(255, 255, 255, 0.05)',
+              },
+            }}
+          >
+            {isCollapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </Box>
+      </Box>
+    </Box>
+  );
 
   return (
-    <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-      <div className="sidebar-header">
-        <div className={`business-selector ${isAccountDropdownOpen ? 'dropdown-open' : ''}`} onClick={toggleAccountDropdown}>
-          <div className="business-icon">N</div>
-          {!isCollapsed && (
-            <>
-              <div className="business-info">
-                <div className="business-name">New business sandbox</div>
-                <div className="business-subtitle">New business</div>
-              </div>
-              <div className="dropdown-arrow">⌄</div>
-            </>
-          )}
-        </div>
-        
-        {!isCollapsed && isAccountDropdownOpen && (
-          <div className="account-dropdown">
-            <div className="dropdown-header">
-              <div className="account-icon-large">N</div>
-              <div className="account-info-large">
-                <div className="account-name-large">New business sandbox</div>
-                <div className="account-subtitle-large">New business</div>
-              </div>
-              <button className="exit-sandbox-btn">Exit sandbox</button>
-            </div>
-            
-            <div className="dropdown-divider"></div>
-            
-            <div className="dropdown-section">
-              <div className="dropdown-item">
-                <span className="dropdown-icon">⚙️</span>
-                <span className="dropdown-text">Settings</span>
-              </div>
-              <div className="dropdown-item">
-                <span className="dropdown-icon">📦</span>
-                <span className="dropdown-text">Switch sandbox</span>
-                <span className="dropdown-arrow-right">›</span>
-              </div>
-            </div>
-            
-            <div className="dropdown-divider"></div>
-            
-            <div className="dropdown-section">
-              <div className="dropdown-item">
-                <span className="dropdown-icon">🏪</span>
-                <span className="dropdown-text">Other accounts</span>
-                <span className="dropdown-arrow-right">›</span>
-              </div>
-            </div>
-            
-            <div className="dropdown-divider"></div>
-            
-            <div className="dropdown-section">
-              <div className="dropdown-item">
-                <span className="dropdown-icon">👤</span>
-                <span className="dropdown-text">Priyamshu</span>
-                <span className="info-icon">i</span>
-              </div>
-              <div className="dropdown-item">
-                <span className="dropdown-icon">🚪</span>
-                <span className="dropdown-text">Sign out</span>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+    <>
+      {/* Mobile Menu Icon */}
+      <IconButton
+        color="inherit"
+        edge="start"
+        onClick={handleDrawerToggle}
+        sx={{
+          position: 'fixed',
+          top: 16,
+          left: 16,
+          zIndex: theme.zIndex.drawer + 1,
+          color: '#fff',
+          display: { md: 'none' },
+        }}
+      >
+        <MenuIcon />
+      </IconButton>
 
-      <nav className="sidebar-nav">
-        <div className="nav-section">
-          {mainNavItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
-            >
-              <span className={`nav-icon icon-${item.name.toLowerCase().replace(' ', '-')}`}></span>
-              {!isCollapsed && <span className="nav-text">{item.name}</span>}
-            </Link>
-          ))}
-        </div>
-
-        <div className="nav-section">
-          {!isCollapsed && <div className="section-title">Products</div>}
-          {productItems.map((item, index) => (
-            <div key={item.name} className="nav-item-container">
-              <div 
-                className="nav-item"
-                onClick={() => item.hasDropdown && toggleExpanded(item.name)}
-              >
-                <span className={`nav-icon icon-${item.name.toLowerCase()}`}></span>
-                {!isCollapsed && <span className="nav-text">{item.name}</span>}
-                {!isCollapsed && item.hasDropdown && (
-                  <span className="dropdown-arrow">
-                    {expandedItems[item.name] ? '⌃' : '⌄'}
-                  </span>
-                )}
-              </div>
-              {!isCollapsed && item.hasDropdown && expandedItems[item.name] && (
-                <div className="dropdown-content">
-                  <div className="dropdown-item">Sub-item 1</div>
-                  <div className="dropdown-item">Sub-item 2</div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </nav>
-
-      <div className="sidebar-footer">
-        <div className="developers-section">
-          <span className="dev-icon icon-developers"></span>
-          {!isCollapsed && <span className="dev-text">Developers</span>}
-        </div>
-        <button 
-          className="collapse-btn"
-          onClick={() => setIsCollapsed(!isCollapsed)}
+      {/* Drawer */}
+      <Box
+        component="nav"
+        sx={{
+          width: { md: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH },
+          flexShrink: { md: 0 },
+        }}
+      >
+        {/* Temporary drawer for mobile */}
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', md: 'none' },
+            '& .MuiDrawer-paper': {
+              width: DRAWER_WIDTH,
+              bgcolor: '#1e1e2f',
+              borderRight: '1px solid rgba(255, 255, 255, 0.12)',
+            },
+          }}
         >
-          {isCollapsed ? '›' : '‹'}
-        </button>
-      </div>
-    </div>
+          {drawer}
+        </Drawer>
+
+        {/* Permanent drawer for desktop */}
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            '& .MuiDrawer-paper': {
+              width: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH,
+              boxSizing: 'border-box',
+              bgcolor: '#1e1e2f',
+              borderRight: '1px solid rgba(255, 255, 255, 0.12)',
+              transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+              }),
+            },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+    </>
   );
 };
 
