@@ -24,7 +24,7 @@ import {
 } from '@mui/icons-material';
 import './DashboardNavbar.css';
 
-const DashboardNavbar = () => {
+const DashboardNavbar = ({ isCollapsed }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [notificationAnchor, setNotificationAnchor] = useState(null);
@@ -76,7 +76,13 @@ const DashboardNavbar = () => {
   };
 
   return (
-    <Box className="dashboard-navbar">
+    <Box className="dashboard-navbar"
+      sx={{
+        width: isCollapsed ? "calc(100vw - 60px)" : "calc(100vw - 240px)",
+        // marginLeft: isCollapsed ? "32px" : "240px",
+        transition: "all 0.3s ease",
+        }}
+      >
       <Box className="navbar-content">
         <Box className="navbar-left">
           <Box className="search-container">
@@ -85,12 +91,7 @@ const DashboardNavbar = () => {
           </Box>
         </Box>
         
-        <Box className="navbar-center">
-          <Box className="info-message">
-            You're in sandbox mode. <a href="#" className="learn-more">Switch to live mode</a>
-          </Box>
-        </Box>
-        
+      
         <Box className="navbar-right">
           {/* Tenant Switcher */}
           <Tooltip title="Switch tenant">
@@ -245,13 +246,7 @@ const DashboardNavbar = () => {
             </MenuItem>
           </Menu>
 
-          {/* Setup Guide Button */}
-          <Box className="setup-guide">
-            <button className="setup-btn">
-              Setup guide
-              <span className="loading-spinner">⟳</span>
-            </button>
-          </Box>
+          
         </Box>
       </Box>
     </Box>

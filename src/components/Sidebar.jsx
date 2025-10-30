@@ -22,7 +22,7 @@ import {
 const DRAWER_WIDTH = 240;
 const DRAWER_WIDTH_COLLAPSED = 60;
 
-const Sidebar = () => {
+const Sidebar = ({ onToggle }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -30,13 +30,16 @@ const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  // prymcr -removed const use state isCollapsed
+  
+
   const menuItems = [
-    { label: 'Dashboard', path: '/dashboard' },
+    { label: 'Overview', path: '/dashboard' },
     { label: 'Transactions', path: '/transactions' },
     { label: 'Configurations', path: '/configurations' },
-    { label: 'Reports & Analytics', path: '/reports' },
+    { label: 'Settlements', path: '/reports' },
     { label: 'Users & Roles', path: '/users' },
-    { label: 'Developer / API', path: '/developer' },
+    // { label: 'Developer / API', path: '/developer' },
     { label: 'Settings', path: '/settings' },
     { label: 'Logs / Audit Trail', path: '/logs' },
     { label: 'Support', path: '/support' },
@@ -48,6 +51,7 @@ const Sidebar = () => {
 
   const handleCollapse = () => {
     setIsCollapsed(!isCollapsed);
+    if (onToggle) onToggle(!isCollapsed);
   };
 
   const handleNavigation = (path) => {
@@ -69,6 +73,8 @@ const Sidebar = () => {
       .toUpperCase()
       .substring(0, 2);
   };
+
+
 
   const drawer = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -119,7 +125,7 @@ const Sidebar = () => {
                   borderRadius: 2,
                   mb: 0.5,
                   bgcolor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
-                  borderLeft: isActive ? '3px solid #2196f3' : '3px solid transparent',
+                  borderLeft: isActive ? '3px solid ${theme.palette.primary.main}' : '3px solid transparent',
                   color: '#ffffff',
                   '&:hover': {
                     bgcolor: 'rgba(255, 255, 255, 0.05)',
@@ -180,73 +186,74 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Menu Icon */}
-      <IconButton
-        color="inherit"
-        edge="start"
-        onClick={handleDrawerToggle}
-        sx={{
-          position: 'fixed',
-          top: 16,
-          left: 16,
-          zIndex: theme.zIndex.drawer + 1,
-          color: '#fff',
-          display: { md: 'none' },
-        }}
-      >
-        <MenuIcon />
-      </IconButton>
-
-      {/* Drawer */}
-      <Box
-        component="nav"
-        sx={{
-          width: { md: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH },
-          flexShrink: { md: 0 },
-        }}
-      >
-        {/* Temporary drawer for mobile */}
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+        {/* Mobile Menu Icon */}
+        <IconButton
+          color="inherit"
+          edge="start"
+          onClick={handleDrawerToggle}
           sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': {
-              width: DRAWER_WIDTH,
-              bgcolor: '#1e1e2f',
-              borderRight: '1px solid rgba(255, 255, 255, 0.12)',
-            },
+            position: 'fixed',
+            top: 16,
+            left: 16,
+            zIndex: theme.zIndex.drawer + 1,
+            color: '#fff',
+            display: { md: 'none' },
           }}
         >
-          {drawer}
-        </Drawer>
+          <MenuIcon />
+        </IconButton>
 
-        {/* Permanent drawer for desktop */}
-        <Drawer
-          variant="permanent"
+        {/* Drawer */}
+        <Box
+          component="nav"
           sx={{
-            display: { xs: 'none', md: 'block' },
-            '& .MuiDrawer-paper': {
-              width: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH,
-              boxSizing: 'border-box',
-              bgcolor: '#1e1e2f',
-              borderRight: '1px solid rgba(255, 255, 255, 0.12)',
-              transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-              }),
-            },
+            width: { md: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH },
+            flexShrink: { md: 0 },
           }}
-          open
         >
-          {drawer}
-        </Drawer>
-      </Box>
+          {/* Temporary drawer for mobile */}
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+              '& .MuiDrawer-paper': {
+                width: DRAWER_WIDTH,
+                bgcolor: '#004EEB',
+                borderRight: '1px solid rgba(255, 255, 255, 0.12)',
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+
+          {/* Permanent drawer for desktop */}
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: 'none', md: 'block' },
+              '& .MuiDrawer-paper': {
+                width: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH,
+                boxSizing: 'border-box',
+                bgcolor: '#878fe0ff',
+                borderRight: '1px solid rgba(255, 255, 255, 0.12)',
+                transition: theme.transitions.create('width', {
+                  easing: theme.transitions.easing.sharp,
+                  duration: theme.transitions.duration.enteringScreen,
+                }),
+              },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
     </>
+    
   );
 };
 
