@@ -36,9 +36,9 @@ const DashboardNavbar = ({ isCollapsed }) => {
   ]);
 
   const tenants = [
-    { name: 'Acme Corp', type: 'Production', status: 'active' },
-    { name: 'Test Business', type: 'Sandbox', status: 'sandbox' },
-    { name: 'Demo Account', type: 'Demo', status: 'inactive' }
+    { name: '<tenant>-P', type: 'Production', status: 'active' },
+    { name: '<tenant>-D', type: 'Development', status: 'inactive' },
+    { name: '<tenant>-T', type: 'Testing', status: 'inactive' }
   ];
 
   const handleMenuOpen = (event) => {
@@ -94,14 +94,14 @@ const DashboardNavbar = ({ isCollapsed }) => {
       
         <Box className="navbar-right">
           {/* Tenant Switcher */}
-          <Tooltip title="Switch tenant">
+          <Tooltip title="Switch line">
             <Box 
               className="tenant-selector"
               onClick={handleTenantClick}
               sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 1, px: 2, py: 0.5, borderRadius: 1, '&:hover': { backgroundColor: 'rgba(0,0,0,0.04)' } }}
             >
               <Business sx={{ fontSize: 20 }} />
-              <Typography variant="body2" fontWeight={600}>Acme Corp</Typography>
+              <Typography variant="body2" fontWeight={600}>CR-Pline</Typography>
             </Box>
           </Tooltip>
 
@@ -146,7 +146,7 @@ const DashboardNavbar = ({ isCollapsed }) => {
               <ListItemIcon>
                 <SettingsOutlined />
               </ListItemIcon>
-              <ListItemText primary="Manage tenants" />
+              <ListItemText primary="Manage lines" />
             </MenuItem>
           </Menu>
 
@@ -223,7 +223,7 @@ const DashboardNavbar = ({ isCollapsed }) => {
           >
             <Box sx={{ px: 2, py: 1.5, borderBottom: '1px solid #e0e0e0' }}>
               <Typography variant="body2" fontWeight="600">John Doe</Typography>
-              <Typography variant="caption" color="textSecondary">john@acmecorp.com</Typography>
+              <Typography variant="caption" color="textSecondary">john@crunchyroll.com</Typography>
             </Box>
             <MenuItem onClick={handleMenuClose}>
               <ListItemIcon>

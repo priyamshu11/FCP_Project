@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import DashboardNavbar from '../components/DashboardNavbar';
 import './Settings.css';
 
 const Settings = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const handleSidebarToggle = (collapsed) => {
+    setIsCollapsed(collapsed);
+  };
   const settingsData = {
     personal: [
       {
@@ -75,9 +80,18 @@ const Settings = () => {
 
   return (
     <div className="dashboard-page">
-      <Sidebar />
-      <DashboardNavbar />
-      <div className="dashboard-content-wrapper">
+      <Sidebar onToggle={handleSidebarToggle} />
+      <div
+        className="main-content"
+        style={{
+          marginLeft: isCollapsed ? "64px" : "244px",
+          paddingTop: "64px",
+          width: isCollapsed ? "calc(100vw - 64px)" : "calc(100vw - 244px)",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <DashboardNavbar isCollapsed={isCollapsed} />
+        <div className="dashboard-content-wrapper">
         <div className="settings-page">
           <div className="settings-header">
             <h1></h1>
@@ -120,6 +134,7 @@ const Settings = () => {
           </div>
         </section>
           </div>
+        </div>
         </div>
       </div>
     </div>

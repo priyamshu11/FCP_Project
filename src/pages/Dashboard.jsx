@@ -207,11 +207,12 @@ const Dashboard = () => {
                 </Grid>
               ))}
             </Grid>
-
+            
             {/* Charts Section */}
-            <Grid container spacing={2} sx={{ mb: 4 }}>
+            
+            <Grid container spacing={2} sx={{ mb: 4 ,alignItems: 'stretch'}}>
               {/* Transactions Over Time - Line Chart */}
-              <Grid item xs={6} lg={8}>
+              <Grid item xs={12} md={6}>
                 <Card 
                   elevation={2}
                   sx={{
@@ -229,7 +230,7 @@ const Dashboard = () => {
                         Daily transaction volume (Last 7 days)
                       </Typography>
                     </Box>
-                    <Box sx={{ flex: 1, minHeight: 400 }}>
+                    <Box sx={{ flex: 1, minHeight: 380,minWidth: 400 }}>
                       <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={transactionsOverTime}>
                           <defs>
@@ -281,7 +282,7 @@ const Dashboard = () => {
               </Grid>
 
               {/* Payment Method Distribution - Pie Chart */}
-              <Grid item xs={6} lg={8}>
+              <Grid item xs={12} md={6}>
                 <Card 
                   elevation={2}
                   sx={{
@@ -299,8 +300,14 @@ const Dashboard = () => {
                         Distribution by payment type
                       </Typography>
                     </Box>
-                    <Box sx={{ flex: 1, minHeight: 400 }}>
-                      <ResponsiveContainer width="100%" height="100%">
+                    <Box 
+                        sx={{ flex: 1, 
+                        minHeight: 380,
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        alignItems: 'center'  }}
+                        >
+                      <ResponsiveContainer width="85%" height="85%">
                         <PieChart>
                           <Pie
                             data={paymentMethods}
@@ -329,7 +336,7 @@ const Dashboard = () => {
                       </ResponsiveContainer>
                     </Box>
                     {/* Legend for pie chart */}
-                    <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                    <Box sx={{ mt: 2, display: 'flex',justifyContent: 'center', flexWrap: 'wrap', gap: 2 }}>
                       {paymentMethods.map((item, index) => (
                         <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                           <Box
@@ -355,7 +362,7 @@ const Dashboard = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Paper elevation={2} sx={{ width: '100%' }}>
-              <Box sx={{ p: 3 }}>
+              <Box sx={{ p: 3,minWidth: '950px' }}>
                 <Box sx={{ mb: 3 }}>
                   <Typography variant="h6" fontWeight="600" gutterBottom>
                     Recent Transactions
@@ -365,7 +372,7 @@ const Dashboard = () => {
                   </Typography>
                 </Box>
                     
-                <TableContainer sx={{ borderRadius: 1, overflow: 'hidden' }}>
+                <TableContainer sx={{ borderRadius: 1, overflow: 'auto' }}>
                   <Table sx={{ minWidth: 650 }}>
                     <TableHead>
                       <TableRow sx={{ bgcolor: '#f8f9fa' }}>

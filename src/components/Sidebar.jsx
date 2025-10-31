@@ -89,13 +89,15 @@ const Sidebar = ({ onToggle }) => {
         }}
       >
         {!isCollapsed ? (
-          <Typography variant="h6" noWrap sx={{ color: '#ffffff', fontWeight: 600 }}>
-            Acme Corp
+          //prym crs - color changed
+          <Typography variant="h6" noWrap sx={{ color: '#4931c1ff', fontWeight: 600 }}> 
+            Crunchyroll
           </Typography>
         ) : (
-          <Typography variant="h6" noWrap sx={{ color: '#ffffff', fontWeight: 700 }}>
+          <Typography variant="h6" noWrap sx={{ color: '#4931c1ff', fontWeight: 700 }}> 
             AC
           </Typography>
+          //prym cre
         )}
       </Box>
 
@@ -126,7 +128,7 @@ const Sidebar = ({ onToggle }) => {
                   mb: 0.5,
                   bgcolor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
                   borderLeft: isActive ? '3px solid ${theme.palette.primary.main}' : '3px solid transparent',
-                  color: '#ffffff',
+                  color: '#ffffff',//prym cr
                   '&:hover': {
                     bgcolor: 'rgba(255, 255, 255, 0.05)',
                   },
@@ -140,7 +142,8 @@ const Sidebar = ({ onToggle }) => {
                       justifyContent: 'center',
                       display: 'flex',
                       alignItems: 'center',
-                      color: isActive ? '#2196f3' : 'rgba(255, 255, 255, 0.7)',
+                      // color: isActive ? '#4931c1ff' : 'rgba(255, 255, 255, 0.7)',
+                      color: isActive ? '#4931c1ff' : 'rgba(101, 134, 185, 0.76)', //prym cr
                       fontWeight: isActive ? 600 : 400,
                     }}
                   >
@@ -153,7 +156,8 @@ const Sidebar = ({ onToggle }) => {
                       '& .MuiListItemText-primary': {
                         fontSize: '0.95rem',
                         fontWeight: isActive ? 600 : 400,
-                        color: isActive ? '#2196f3' : 'rgba(255, 255, 255, 0.87)',
+                        // color: isActive ? '#2196f3' : 'rgba(255, 255, 255, 0.87)',
+                        color: isActive ? '#4931c1ff' : 'rgba(101, 134, 185, 0.76)',
                       },
                     }}
                   />
@@ -171,7 +175,8 @@ const Sidebar = ({ onToggle }) => {
           <IconButton
             onClick={handleCollapse}
             sx={{
-              color: 'rgba(255, 255, 255, 0.7)',
+              // color: 'rgba(255, 255, 255, 0.7)',//prym cr 
+              color: '#4931c1ff',//prym cr 
               '&:hover': {
                 bgcolor: 'rgba(255, 255, 255, 0.05)',
               },
@@ -239,7 +244,7 @@ const Sidebar = ({ onToggle }) => {
               '& .MuiDrawer-paper': {
                 width: isCollapsed ? DRAWER_WIDTH_COLLAPSED : DRAWER_WIDTH,
                 boxSizing: 'border-box',
-                bgcolor: '#878fe0ff',
+                bgcolor: '#c2c5e1ff',   //prym cr
                 borderRight: '1px solid rgba(255, 255, 255, 0.12)',
                 transition: theme.transitions.create('width', {
                   easing: theme.transitions.easing.sharp,

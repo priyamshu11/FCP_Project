@@ -5,8 +5,8 @@
 }
 
 .transactions-content-wrapper {
-  margin-left: 280px;
-  margin-top: 70px;
+  margin-left: 0px;
+  margin-top: 16px;
   padding: 2rem;
   min-height: calc(100vh - 70px);
   transition: margin-left 0.3s ease;
